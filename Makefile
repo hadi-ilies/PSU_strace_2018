@@ -13,6 +13,7 @@ SRCDIR		=	src/
 INCDIR		=	include/
 
 SRC		=	$(SRCDIR)main.c \
+			$(SRCDIR)pid.c
 
 OBJ		=	$(SRC:.c=.o)
 

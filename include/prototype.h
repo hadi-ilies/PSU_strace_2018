@@ -12,6 +12,6 @@
 #include <sys/types.h>
 #include "strace.h"
 
-pid_t *get_pid(strace_t *strace);
+pid_t *get_pid_process(strace_t *strace);
 
 #endif

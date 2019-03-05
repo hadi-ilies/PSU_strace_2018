@@ -10,14 +10,18 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <getopt.h>
 #include <ctype.h>
+#include <string.h>
 #include "prototype.h"
 #include "strace.h"
 
 static bool isanum(const char *str)
 {
+    if (!str)
+        return (false);
     for (size_t i = 0; str[i] != '\0'; i++) {
-        if (isalpha(str[i]) != 0)
+        if (!isdigit(str[i]))
             return (false);
     }
     return (true);
@@ -27,20 +31,23 @@ static bool check_arg(int argc, char **argv, strace_t *strace)
 {
     char flag;
 
-    for (int i = 1; i < argc; i++) {
-        if ((flag = getopt(argc, argv, "sp")) == '?')
+    while ((flag = getopt(argc, argv, "sp:")) != -1) {
+        if (flag == '?')
             return (false);
-        if ((i + 1 >= argc && flag == 'p') || (i + 1 >= argc && flag == 's'))
+        if (flag == 'p' && !isanum(optarg))
             return (false);
-        if (flag == 'p' && isanum(argv[i + 1]) == false)
-            return (false);
-        if (flag == 'p')
-            strace->mode = P_MODE;
-        if (flag == 's')
-            strace->mode = S_MODE;
+        if (flag == 'p') {
+            strace->mode |= P_MODE;
+            strace->pid = atoi(optarg);
+        } if (flag == 's')
+            strace->mode |= S_MODE;
     }
+    strace->parms = argv + optind;
     return (true);
 }
+
+//if (mode & (S_MODE | D_MODE)) == both of the flags are present
+//if (mode & S_MODE) // s flag present ...etc
 
 static int usage(int status)
 {
@@ -50,15 +57,15 @@ static int usage(int status)
 
 int main(int argc, char **argv)
 {
-    strace_t strace;
+    strace_t strace = {DEFAULT_MODE, 0, NULL};
 
-    strace.mode = DEFAULT_MODE;
     if (argc < 2)
         return (usage(EXIT_ERROR));
     if (strcmp(argv[1], "--help") == 0)
         return (usage(EXIT_SUCCESS));
     if (check_arg(argc, argv, &strace) == false)
         return (usage(EXIT_ERROR));
+    get_pid_process(&strace);
     //get pid looking for the flag entred
     return (0);
 }

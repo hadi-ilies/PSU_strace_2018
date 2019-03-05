@@ -10,10 +10,16 @@
 
 #define EXIT_ERROR 84
 
-typedef enum {DEFAULT_MODE, P_MODE, S_MODE} MODE;
+typedef enum {
+    DEFAULT_MODE = 0b00, //0 in binaire
+    P_MODE = 0b01,
+    S_MODE = 0b10
+} MODE;
 
 typedef struct {
     MODE mode;
+    pid_t pid;
+    char **parms;
 
 } strace_t;
 
