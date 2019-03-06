@@ -12,6 +12,10 @@
 #include <unistd.h>
 #define EXIT_ERROR 84
 #define SYSCALL_OPCODE 0x050f
+#define NB_SYSCALLS 331
+#define URS_START rgt->r15
+#define FIND_PARMS(i) (unsigned long long int) *(&URS_START + (parms_g[i]))
+#define S_NB_PARMS syscalls_g[rgt->rax].nb_params
 
 typedef enum {
     DEFAULT_MODE = 0b00, //0 in binaire
@@ -28,9 +32,12 @@ typedef struct {
 typedef struct	s_prototype
 {
   char *name;
-  int nb_params;
+  size_t nb_params;
   char *params[6];
   char *ret_type;
-} t_prototype;
+} prototype_t;
+
+extern const prototype_t syscalls_g[];
+extern const int parms_g[];
 
 #endif /* !STRACE_H_ */

@@ -15,6 +15,6 @@
 #include "strace.h"
 
 pid_t *get_pid_process(strace_t *strace);
-bool exec_strace(strace_t *strace, int status, pid_t pid);
+bool exec_strace(strace_t *strace, int *status, pid_t pid);
 
 #endif

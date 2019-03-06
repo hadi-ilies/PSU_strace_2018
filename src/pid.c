@@ -51,14 +51,14 @@ pid_t *get_pid_process(strace_t *strace)
             fprintf(stderr, "ptrace PTRACE_ATTACK\n");
         if (waitpid(strace->pid, &status, 0) == -1)
             fprintf(stderr, "waitpid funtion error\n");
-        exec_strace(strace, status, strace->pid);
+        exec_strace(strace, &status, strace->pid);
     } else {
         //printf("WITHOUT P\n"); // when you remove that there is comflict with p mode
         for (size_t i = 0; strace->parms[i] != NULL; i++) {
             int status = 0;
             pid_t pid = exec_param(strace->parms[i], status);
 
-            exec_strace(strace, status, pid);
+            exec_strace(strace, &status, pid);
         }
         //fork and exec receive pid
     }

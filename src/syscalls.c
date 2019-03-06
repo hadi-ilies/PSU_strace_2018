@@ -7,7 +7,7 @@
 
 #include "strace.h"
 
-const t_prototype syscalls_g[] =
+const prototype_t syscalls_g[] =
 {
   {"read", 3, {"int", "char *", "size_t"}, "ssize_t"},
   {"write", 3, {"int", "char *", "size_t"}, "ssize_t"},
@@ -465,3 +465,5 @@ const t_prototype syscalls_g[] =
    {"pid_t", "pid_t", "int", "unsigned long", "unsigned long"}, "int"},
 {"finit_module", 3, {"int", "char *", "int"}, "int"}
 };
+
+const int parms_g[] = {14, 13, 12, 11, 9, 8}; // index registre parms
