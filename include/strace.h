@@ -16,6 +16,8 @@
 #define URS_START rgt->r15
 #define FIND_PARMS(i) (unsigned long long int) *(&URS_START + (parms_g[i]))
 #define S_NB_PARMS syscalls_g[rgt->rax].nb_params
+#define IS_A_POINTER (isapointer != NULL && strcmp(isapointer, "*") == 0) \
+|| (isapointer != NULL && strcmp(isapointer, "**") == 0)
 
 typedef enum {
     DEFAULT_MODE = 0b00, //0 in binaire

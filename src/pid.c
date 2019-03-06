@@ -18,7 +18,7 @@
 #include "strace.h"
 #include "prototype.h"
 
-static pid_t exec_param(char *exec, int status)
+static pid_t exec_param(char *exec, int *status)
 {
     pid_t pid = fork();
 
@@ -31,7 +31,7 @@ static pid_t exec_param(char *exec, int status)
         //warn("execvp error");
         exit(84);
     } else {
-        if (waitpid(pid, &status, 0) == -1) {
+        if (waitpid(pid, status, 0) == -1) {
             fprintf(stderr, "waitpid funtion error\n");
             return (false);
         }
@@ -56,7 +56,7 @@ pid_t *get_pid_process(strace_t *strace)
         //printf("WITHOUT P\n"); // when you remove that there is comflict with p mode
         for (size_t i = 0; strace->parms[i] != NULL; i++) {
             int status = 0;
-            pid_t pid = exec_param(strace->parms[i], status);
+            pid_t pid = exec_param(strace->parms[i], &status);
 
             exec_strace(strace, &status, pid);
         }

@@ -15,7 +15,8 @@ INCDIR		=	include/
 SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)pid.c \
 			$(SRCDIR)strace.c \
-			$(SRCDIR)syscalls.c
+			$(SRCDIR)syscalls.c \
+			$(SRCDIR)display_args.c
 
 OBJ		=	$(SRC:.c=.o)
 
