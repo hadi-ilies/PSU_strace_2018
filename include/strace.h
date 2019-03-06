@@ -18,6 +18,8 @@
 #define S_NB_PARMS syscalls_g[rgt->rax].nb_params
 #define IS_A_POINTER (isapointer != NULL && strcmp(isapointer, "*") == 0) \
 || (isapointer != NULL && strcmp(isapointer, "**") == 0)
+#define IS_PRINTABLE(x) x >= ' ' && x <= '~'
+
 
 typedef enum {
     DEFAULT_MODE = 0b00, //0 in binaire
@@ -31,13 +33,20 @@ typedef struct {
     char **parms;
 } strace_t;
 
-typedef struct	s_prototype
+typedef struct
 {
   char *name;
   size_t nb_params;
   char *params[6];
   char *ret_type;
 } prototype_t;
+/*
+typedef struct
+{
+  char *type;
+
+} types_t;
+*/
 
 extern const prototype_t syscalls_g[];
 extern const int parms_g[];

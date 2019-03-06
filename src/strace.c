@@ -37,7 +37,8 @@ static bool display_args(strace_t *strace, struct user_regs_struct *rgt)
             if (IS_A_POINTER)
                 display_pointer(rgt, i);
             else
-                i + 1 == S_NB_PARMS ? printf("0x%llx", FIND_PARMS(i)) : (printf("0x%llx, ", FIND_PARMS(i)));
+                display_types(rgt, i);
+                //i + 1 == S_NB_PARMS ? printf("0x%llx", FIND_PARMS(i)) : (printf("0x%llx, ", FIND_PARMS(i)));
         }
         printf(")");
     } else {

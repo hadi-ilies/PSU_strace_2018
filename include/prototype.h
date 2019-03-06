@@ -18,5 +18,6 @@
 pid_t *get_pid_process(strace_t *strace);
 bool exec_strace(strace_t *strace, int *status, pid_t pid);
 void display_pointer(struct user_regs_struct *rgt, size_t i);
+void display_types(struct user_regs_struct *rgt, size_t i);
 
 #endif
