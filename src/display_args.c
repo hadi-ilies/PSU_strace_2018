@@ -18,6 +18,7 @@
 #include <sys/user.h>
 #include <sys/wait.h>
 #include <err.h>
+#include <ctype.h>
 #include "strace.h"
 
 
@@ -38,7 +39,7 @@ void display_string(strace_t *strace, struct user_regs_struct *rgt, size_t i)
     unsigned long long int register_value = FIND_PARMS(i);
 
     (void)fprintf(stderr, "\"");
-    for (size_t j = 0; (char)c != '\0' && i < 42; j++, register_value++) {
+    for (size_t j = 0; (char)c != '\0' && j < 42; j++, register_value++) {
         if ((c = ptrace(PTRACE_PEEKDATA, strace->pid,
                         register_value, NULL)) == -1) {
             fprintf(stderr, "\033[36mptrace PTRACE_PEEK_DATA error: ");
@@ -47,7 +48,9 @@ void display_string(strace_t *strace, struct user_regs_struct *rgt, size_t i)
         }
         char ch = (char) c;
 
-        if (IS_PRINTABLE(ch))
+        if (ch == '\t')
+            fprintf(stderr, "\\t");
+        if (isprint(ch))
             fprintf(stderr, "%c", ch);
        // else
        //     fprintf(stderr, "\\%o", ch);
