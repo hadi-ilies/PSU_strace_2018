@@ -28,11 +28,11 @@ static pid_t exec_param(char *exec, int *status)
         ptrace(PTRACE_TRACEME, 0, NULL, NULL);
         //(void)raise(SIGSTOP);
         (void)execvp(exec, &exec);
-        fprintf(stderr, "./strace: No such file or directory\n");
+        printf("./strace: No such file or directory\n");
         exit(84);
     } else {
         if (waitpid(pid, status, 0) == -1) {
-            fprintf(stderr, "waitpid funtion error\n");
+            printf("waitpid funtion error\n");
             return (false);
         }
         return (pid);
@@ -51,7 +51,7 @@ bool get_pid_process(strace_t *strace)
             perror("./strace");
             return (false);
         } if (waitpid(strace->pid, &status, 0) == -1) {
-            fprintf(stderr, "waitpid funtion error\n");
+            printf("waitpid funtion error\n");
             return (false);
         }
         exec_strace(strace, &status, strace->pid);

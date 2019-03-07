@@ -45,7 +45,7 @@ static bool check_arg(int argc, char **argv, strace_t *strace)
             usage(EXIT_ERROR);
             return (false);
         } if (flag == 'p' && !isanum(optarg)) {
-            fprintf(stderr, "./strace: Invalid process id: '%s'\n", optarg);
+            printf("./strace: Invalid process id: '%s'\n", optarg);
             return (false);
         } if (flag == 'p') {
             strace->mode |= P_MODE;
