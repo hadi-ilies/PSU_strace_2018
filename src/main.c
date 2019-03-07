@@ -13,8 +13,17 @@
 #include <getopt.h>
 #include <ctype.h>
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "prototype.h"
 #include "strace.h"
+
+static int usage(int status)
+{
+    fprintf(stdout, "USAGE: ./strace [-s] [-p <pid>|<command>]\n");
+    return (status);
+}
 
 static bool isanum(const char *str)
 {
@@ -32,11 +41,13 @@ static bool check_arg(int argc, char **argv, strace_t *strace)
     char flag;
 
     while ((flag = getopt(argc, argv, "sp:")) != -1) {
-        if (flag == '?')
+        if (flag == '?') {
+            usage(EXIT_ERROR);
             return (false);
-        if (flag == 'p' && !isanum(optarg))
+        } if (flag == 'p' && !isanum(optarg)) {
+            fprintf(stderr, "./strace: Invalid process id: '%s'\n", optarg);
             return (false);
-        if (flag == 'p') {
+        } if (flag == 'p') {
             strace->mode |= P_MODE;
             strace->pid = atoi(optarg);
         } if (flag == 's')
@@ -48,13 +59,20 @@ static bool check_arg(int argc, char **argv, strace_t *strace)
 
 //if (mode & (S_MODE | D_MODE)) == both of the flags are present
 //if (mode & S_MODE) // s flag present ...etc
-
-static int usage(int status)
+/*
+static bool check_parms(strace_t *strace)
 {
-    fprintf(stdout, "USAGE: ./strace [-s] [-p <pid>|<command>]\n");
-    return (status);
-}
+    for (size_t i = 0; strace->parms[i] != NULL; i++) {
+        pid_t pid = fork();
 
+        if (pid == 0 && execvp(strace->parms[i], &strace->parms[i]) == -1) {
+            perror("./strace");
+            exit(84);
+        }
+    }
+    return (true);
+}
+*/
 int main(int argc, char **argv)
 {
     strace_t strace = {DEFAULT_MODE, 0, NULL};
@@ -64,8 +82,10 @@ int main(int argc, char **argv)
     if (strcmp(argv[1], "--help") == 0)
         return (usage(EXIT_SUCCESS));
     if (check_arg(argc, argv, &strace) == false)
-        return (usage(EXIT_ERROR));
-    get_pid_process(&strace);
-    //get pid looking for the flag entred
-    return (0);
+        return (EXIT_ERROR);
+    //if (check_parms(&strace) == false)
+    //    return (EXIT_ERROR);
+    if (get_pid_process(&strace) == false)
+        return (EXIT_ERROR);
+    return (EXIT_SUCCESS);
 }

@@ -23,12 +23,12 @@ static pid_t exec_param(char *exec, int *status)
     pid_t pid = fork();
 
     while (pid == -1 && errno == EAGAIN)
-        pid = fork();
+        exit(84);
     if (pid == 0) {
         ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-        (void)raise(SIGSTOP);
+        //(void)raise(SIGSTOP);
         (void)execvp(exec, &exec);
-        //warn("execvp error");
+        fprintf(stderr, "./strace: No such file or directory\n");
         exit(84);
     } else {
         if (waitpid(pid, status, 0) == -1) {
@@ -42,15 +42,18 @@ static pid_t exec_param(char *exec, int *status)
     return (pid);
 }
 
-pid_t *get_pid_process(strace_t *strace)
+bool get_pid_process(strace_t *strace)
 {
     if (strace->mode & P_MODE) {
         int status = 0;
 
-        if (ptrace(PTRACE_ATTACH, strace->pid, NULL, NULL) == -1)
-            fprintf(stderr, "ptrace PTRACE_ATTACK\n");
-        if (waitpid(strace->pid, &status, 0) == -1)
+        if (ptrace(PTRACE_ATTACH, strace->pid, NULL, NULL) == -1) {
+            perror("./strace");
+            return (false);
+        } if (waitpid(strace->pid, &status, 0) == -1) {
             fprintf(stderr, "waitpid funtion error\n");
+            return (false);
+        }
         exec_strace(strace, &status, strace->pid);
     } else {
         //printf("WITHOUT P\n"); // when you remove that there is comflict with p mode
@@ -62,5 +65,5 @@ pid_t *get_pid_process(strace_t *strace)
         }
         //fork and exec receive pid
     }
-    return (NULL);
+    return (true);
 }

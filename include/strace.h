@@ -10,6 +10,7 @@
 
 #include <sys/types.h>
 #include <unistd.h>
+#include <sys/user.h>
 #define EXIT_ERROR 84
 #define SYSCALL_OPCODE 0x050f
 #define NB_SYSCALLS 331
@@ -40,15 +41,16 @@ typedef struct
   char *params[6];
   char *ret_type;
 } prototype_t;
-/*
+
 typedef struct
 {
   char *type;
+  void (*display_types) (struct user_regs_struct *rgt, size_t i);
 
 } types_t;
-*/
 
 extern const prototype_t syscalls_g[];
 extern const int parms_g[];
+extern const types_t types_g[];
 
 #endif /* !STRACE_H_ */

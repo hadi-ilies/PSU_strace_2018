@@ -9,7 +9,7 @@
 
 const prototype_t syscalls_g[] =
 {
-  {"read", 3, {"int", "char *", "size_t"}, "ssize_t"},
+  {"read", 3, {"int", "void *", "size_t"}, "ssize_t"},
   {"write", 3, {"int", "char *", "size_t"}, "ssize_t"},
   {"open", 2, {"char *", "int"}, "int"},
   {"close", 1, {"int"}, "int"},

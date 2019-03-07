@@ -15,9 +15,18 @@
 #include <sys/user.h>
 #include "strace.h"
 
-pid_t *get_pid_process(strace_t *strace);
+bool get_pid_process(strace_t *strace);
 bool exec_strace(strace_t *strace, int *status, pid_t pid);
 void display_pointer(struct user_regs_struct *rgt, size_t i);
-void display_types(struct user_regs_struct *rgt, size_t i);
+void display_types(strace_t *strace, struct user_regs_struct *rgt, size_t i);
+void display_int(struct user_regs_struct *rgt, size_t i);
+void display_uint(struct user_regs_struct *rgt, size_t i);
+void display_long(struct user_regs_struct *rgt, size_t i);
+void display_ulong(struct user_regs_struct *rgt, size_t i);
+void display_string(strace_t *strace, struct user_regs_struct *rgt, size_t i);
+void display_unimplemented(struct user_regs_struct *rgt, size_t i);
+void display_nothing(struct user_regs_struct *rgt, size_t i);
+
+
 
 #endif
