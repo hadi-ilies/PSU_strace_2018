@@ -94,11 +94,10 @@ void display_pointer(struct user_regs_struct *rgt, size_t i)
 
 void display_unimplemented(struct user_regs_struct *rgt, size_t i)
 {
-    ;
+    (void) rgt, (void) i;
 }
 
 void display_nothing(struct user_regs_struct *rgt, size_t i)
 {
-    ;
+    (void) rgt, (void) i;
 }
-

@@ -46,8 +46,14 @@ typedef struct
 {
   char *type;
   void (*display_types) (struct user_regs_struct *rgt, size_t i);
-
 } types_t;
+
+typedef struct
+{
+  char *ret_type;
+  void (*display_ret_types) (unsigned long long int value);
+} ret_types_t;
+
 
 extern const prototype_t syscalls_g[];
 extern const int parms_g[];

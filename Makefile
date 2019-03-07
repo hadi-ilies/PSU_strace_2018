@@ -17,7 +17,9 @@ SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)strace.c \
 			$(SRCDIR)syscalls.c \
 			$(SRCDIR)display_args.c \
-			$(SRCDIR)types.c
+			$(SRCDIR)types.c \
+			$(SRCDIR)ret_types.c \
+			$(SRCDIR)func_ret_types.c \
 
 OBJ		=	$(SRC:.c=.o)
 

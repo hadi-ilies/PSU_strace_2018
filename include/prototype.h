@@ -27,6 +27,15 @@ void display_string(strace_t *strace, struct user_regs_struct *rgt, size_t i);
 void display_unimplemented(struct user_regs_struct *rgt, size_t i);
 void display_nothing(struct user_regs_struct *rgt, size_t i);
 
-
+void display_ret_type(unsigned long long int value, char *type);
+void ret_display_char(unsigned long long int value);
+void ret_display_string(unsigned long long int value);
+void ret_display_int(unsigned long long int value);
+void ret_display_long(unsigned long long int value);
+void ret_display_uint(unsigned long long int value);
+void ret_display_ulong(unsigned long long int value);
+void ret_display_pointer(unsigned long long int value);
+void ret_display_unimplemented(unsigned long long int value);
+void ret_display_nothing(unsigned long long int value);
 
 #endif

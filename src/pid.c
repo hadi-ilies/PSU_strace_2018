@@ -26,7 +26,6 @@ static pid_t exec_param(char *exec, int *status)
         exit(84);
     if (pid == 0) {
         ptrace(PTRACE_TRACEME, 0, NULL, NULL);
-        //(void)raise(SIGSTOP);
         (void)execvp(exec, &exec);
         printf("./strace: No such file or directory\n");
         exit(84);
