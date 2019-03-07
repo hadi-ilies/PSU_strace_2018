@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "syscall.h": "c",
-        "unistd.h": "c",
-        "unistd_64.h": "c",
-        "strace.h": "c"
-    }
-}
