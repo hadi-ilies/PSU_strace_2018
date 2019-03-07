@@ -57,22 +57,6 @@ static bool check_arg(int argc, char **argv, strace_t *strace)
     return (true);
 }
 
-//if (mode & (S_MODE | D_MODE)) == both of the flags are present
-//if (mode & S_MODE) // s flag present ...etc
-/*
-static bool check_parms(strace_t *strace)
-{
-    for (size_t i = 0; strace->parms[i] != NULL; i++) {
-        pid_t pid = fork();
-
-        if (pid == 0 && execvp(strace->parms[i], &strace->parms[i]) == -1) {
-            perror("./strace");
-            exit(84);
-        }
-    }
-    return (true);
-}
-*/
 int main(int argc, char **argv)
 {
     strace_t strace = {DEFAULT_MODE, 0, NULL};
@@ -83,8 +67,6 @@ int main(int argc, char **argv)
         return (usage(EXIT_SUCCESS));
     if (check_arg(argc, argv, &strace) == false)
         return (EXIT_ERROR);
-    //if (check_parms(&strace) == false)
-    //    return (EXIT_ERROR);
     if (get_pid_process(&strace) == false)
         return (EXIT_ERROR);
     return (EXIT_SUCCESS);

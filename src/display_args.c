@@ -50,8 +50,6 @@ void display_string(strace_t *strace, struct user_regs_struct *rgt, size_t i)
 
         if (isprint(ch) || ch == '\t')
             printf("%c", ch);
-       // else
-       //     printf("\\%o", ch);
     }
     i + 1 == S_NB_PARMS ? (void)printf("\"") : (void)printf("\", ");
 }

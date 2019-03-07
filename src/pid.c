@@ -36,8 +36,6 @@ static pid_t exec_param(char *exec, int *status)
             return (false);
         }
         return (pid);
-        //exec_strace(strace, pid);
-        //waitpid(pid, &status, 0);
     }
     return (pid);
 }
@@ -56,14 +54,12 @@ bool get_pid_process(strace_t *strace)
         }
         exec_strace(strace, &status, strace->pid);
     } else {
-        //printf("WITHOUT P\n"); // when you remove that there is comflict with p mode
         for (size_t i = 0; strace->parms[i] != NULL; i++) {
             int status = 0;
             pid_t pid = exec_param(strace->parms[i], &status);
 
             exec_strace(strace, &status, pid);
         }
-        //fork and exec receive pid
     }
     return (true);
 }
