@@ -21,7 +21,7 @@ const prototype_t syscalls_g[] =
     {"mmap", 6, {"void *", "size_t", "int", "int", "int", "off_t"}, "void *"},
     {"mprotect", 3, {"void *", "size_t", "int"}, "int"},
     {"munmap", 2, {"void *", "size_t"}, "int"},
-    {"brk", 1, {"int"}, "void *"},
+    {"brk", 1, {"void *"}, "int"},
     {"sigaction", 3,
      {"int", "struct sigaction *", "struct sigaction *"}, "int"},
     {"sigprocmask", 3, {"int", "sigset_t *", "sigset_t *"}, "int"},
