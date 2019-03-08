@@ -24,7 +24,7 @@ static bool isasyscall(long rip)
 {
     rip &= 0xffff;
     if (rip == SYSCALL_OPCODE)
-        return (true); // syscall corespondance in register
+        return (true);
     return (false);
 }
 
@@ -51,7 +51,8 @@ static bool display_args(strace_t *strace, struct user_regs_struct *rgt)
     return (true);
 }
 
-static void display_ret(strace_t *strace, struct user_regs_struct *rgt, char *ret_type)
+static void display_ret(strace_t *strace, struct user_regs_struct *rgt,
+                        char *ret_type)
 {
     if (rgt->rax == __NR_exit_group || rgt->rax == __NR_exit
     || rgt->rax == __NR_pkey_free)
@@ -64,8 +65,6 @@ static void display_ret(strace_t *strace, struct user_regs_struct *rgt, char *re
                 printf(" = 0x%llx\n", rgt->rax);
     }
 }
-
-/*rgt->rax is the id of the syscall*/
 
 static void display_syscall(strace_t *strace, pid_t pid, int *status,
 struct user_regs_struct *rgt)

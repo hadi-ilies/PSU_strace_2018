@@ -1,11 +1,8 @@
 /*
-** display_args2.c for PSU_strace_2018 in /toto
-**
-** Made by test
-** Login   <>
-**
-** Started on  Fri Mar 8 6:04:23 PM 2019 test
-** Last update Fri Mar 8 6:04:23 PM 2019 test
+** EPITECH PROJECT, 2019
+** OTTO
+** File description:
+** TOTO
 */
 
 #include <stdio.h>
@@ -40,7 +37,7 @@ void display_ulong(struct user_regs_struct *rgt, size_t i)
 
 void display_pointer(struct user_regs_struct *rgt, size_t i)
 {
-    void* param = (void*) FIND_PARMS(i);
+    void *param = (void*) FIND_PARMS(i);
 
     if (param == NULL)
         i + 1 == S_NB_PARMS ? printf("NULL") : printf("NULL, ");

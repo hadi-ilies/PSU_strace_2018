@@ -1,12 +1,10 @@
 /*
-** func_ret_types2.c for PSU_strace_2018 in /Users/hadibereksi/
-**
-** Made by test
-** Login   <>
-**
-** Started on  Fri Mar 8 6:12:22 PM 2019 test
-** Last update Fri Mar 8 6:12:22 PM 2019 test
+** EPITECH PROJECT, 2019
+** TOTO
+** File description:
+** TOTO
 */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
