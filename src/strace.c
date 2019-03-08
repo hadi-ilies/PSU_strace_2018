@@ -60,7 +60,6 @@ static void display_ret(strace_t *strace, struct user_regs_struct *rgt, char *re
             if (strace->mode & S_MODE) {
                 printf(" = ");
                 display_ret_type(rgt->rax, ret_type);
-                //printf("type %s\n", rgt->rax);
             } else
                 printf(" = 0x%llx\n", rgt->rax);
     }
@@ -101,7 +100,7 @@ bool exec_strace(strace_t *strace, int *status, pid_t pid)
         if (isasyscall(rip) && registers.rax < NB_SYSCALLS) {
             display_syscall(strace, pid, status, &registers);
         } if (WIFEXITED(*status) || WIFSIGNALED(*status)) {
-            (void)printf("+++ exited with %d +++\n", WEXITSTATUS(*status));
+            (void) printf("+++ exited with %d +++\n", WEXITSTATUS(*status));
             exit(EXIT_SUCCESS);
         } if (ptrace(PTRACE_SINGLESTEP, pid, NULL, NULL) == -1)
             return (false);

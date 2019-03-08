@@ -25,7 +25,7 @@ static const ret_types_t ret_types_g[] =
         {"u64", &ret_display_ulong},
         {"size_t", &ret_display_ulong},
         {"ssize_t", &ret_display_long},
-        //{"caddr_t", &ret_display_string},
+        {"caddr_t", &ret_display_string},
         {"ndfs_t", &ret_display_int},
         {"off_t", &ret_display_ulong},
         {"key_t", &ret_display_ulong},

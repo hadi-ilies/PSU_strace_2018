@@ -54,7 +54,7 @@ void ret_display_ulong(unsigned long long int value)
 
 void ret_display_pointer(unsigned long long int value)
 {
-    printf("%p\n", (void *)value);
+    printf("%p\n", (void *) value);
 }
 
 void ret_display_unimplemented(unsigned long long int value)
