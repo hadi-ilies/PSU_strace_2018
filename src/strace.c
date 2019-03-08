@@ -104,7 +104,7 @@ bool exec_strace(strace_t *strace, int *status, pid_t pid)
         } if (ptrace(PTRACE_SINGLESTEP, pid, NULL, NULL) == -1)
             return (false);
         if (waitpid(pid, status, 0) == -1)
-           return (false);
+            return (false);
     }
     return (true);
 }
