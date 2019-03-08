@@ -36,22 +36,22 @@ typedef struct {
 
 typedef struct
 {
-  char *name;
-  size_t nb_params;
-  char *params[6];
-  char *ret_type;
+    char *name;
+    size_t nb_params;
+    char *params[6];
+    char *ret_type;
 } prototype_t;
 
 typedef struct
 {
-  char *type;
-  void (*display_types) (struct user_regs_struct *rgt, size_t i);
+    char *type;
+    void (*display_types) (struct user_regs_struct *rgt, size_t i);
 } types_t;
 
 typedef struct
 {
-  char *ret_type;
-  void (*display_ret_types) (unsigned long long int value);
+    char *ret_type;
+    void (*display_ret_types) (unsigned long long int value);
 } ret_types_t;
 
 

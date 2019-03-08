@@ -21,8 +21,6 @@
 #include <ctype.h>
 #include "strace.h"
 
-
-
 void display_char(struct user_regs_struct *rgt, size_t i)
 {
     char c = (char) FIND_PARMS(i);
@@ -66,38 +64,4 @@ void display_long(struct user_regs_struct *rgt, size_t i)
     long param = (long) FIND_PARMS(i);
 
     i + 1 == S_NB_PARMS ? printf("%ld", param) : printf("%ld, ", param);
-}
-
-void display_uint(struct user_regs_struct *rgt, size_t i)
-{
-    unsigned int param = (unsigned int) FIND_PARMS(i);
-
-    i + 1 == S_NB_PARMS ? printf("%u", param) : printf("%u, ", param);
-}
-
-void display_ulong(struct user_regs_struct *rgt, size_t i)
-{
-    unsigned long param = (unsigned long) FIND_PARMS(i);
-
-    i + 1 == S_NB_PARMS ? printf("%lu", param) : printf("%lu, ", param);
-}
-
-void display_pointer(struct user_regs_struct *rgt, size_t i)
-{
-    void* param = (void*) FIND_PARMS(i);
-
-    if (param == NULL)
-        i + 1 == S_NB_PARMS ? printf("NULL") : printf("NULL, ");
-    else
-        i + 1 == S_NB_PARMS ? printf("%p", param) : printf("%p, ", param);
-}
-
-void display_unimplemented(struct user_regs_struct *rgt, size_t i)
-{
-    (void) rgt, (void) i;
-}
-
-void display_nothing(struct user_regs_struct *rgt, size_t i)
-{
-    (void) rgt, (void) i;
 }

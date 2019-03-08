@@ -12,8 +12,6 @@
 const types_t types_g[] =
     {
         {"void", &display_nothing},
-        //{"char *", &display_string},
-        //{"char **", &display_string_tab},
         {"int", &display_int},
         {"int[2]", &display_pointer},
         {"uint32_t", &display_uint},
@@ -23,7 +21,6 @@ const types_t types_g[] =
         {"u64", &display_ulong},
         {"size_t", &display_ulong},
         {"ssize_t", &display_long},
-        //{"caddr_t", &display_string},
         {"ndfs_t", &display_int},
         {"off_t", &display_ulong},
         {"key_t", &display_ulong},

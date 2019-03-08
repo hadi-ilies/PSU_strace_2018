@@ -14,8 +14,6 @@
 static const ret_types_t ret_types_g[] =
     {
         {"void", &ret_display_nothing},
-        //{"char *", &ret_display_string},
-        //{"char **", &ret_display_string_tab},
         {"int", &ret_display_int},
         {"int[2]", &ret_display_pointer},
         {"uint32_t", &ret_display_uint},

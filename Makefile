@@ -20,6 +20,8 @@ SRC		=	$(SRCDIR)main.c \
 			$(SRCDIR)types.c \
 			$(SRCDIR)ret_types.c \
 			$(SRCDIR)func_ret_types.c \
+			$(SRCDIR)display_args2.c \
+			$(SRCDIR)func_ret_types2.c
 
 OBJ		=	$(SRC:.c=.o)
 
