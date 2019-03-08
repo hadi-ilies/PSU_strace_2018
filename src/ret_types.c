@@ -47,7 +47,6 @@ static const ret_types_t ret_types_g[] =
     {NULL, NULL}
 };
 
-
 void display_ret_type(unsigned long long int value, char *type)
 {
     char *is_pointer = strchr(type, '*');
