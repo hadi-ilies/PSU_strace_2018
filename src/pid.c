@@ -33,11 +33,11 @@ static pid_t exec_param(char *exec, int *status)
     } else {
         if (waitpid(pid, status, 0) == -1) {
             printf("waitpid funtion error\n");
-            return (false);
+            return false;
         }
-        return (pid);
+        return pid;
     }
-    return (pid);
+    return pid;
 }
 
 bool get_pid_process(strace_t *strace)
@@ -47,10 +47,10 @@ bool get_pid_process(strace_t *strace)
 
         if (ptrace(PTRACE_ATTACH, strace->pid, NULL, NULL) == -1) {
             perror("./strace");
-            return (false);
+            return false;
         } if (waitpid(strace->pid, &status, 0) == -1) {
             printf("waitpid funtion error\n");
-            return (false);
+            return false;
         }
         exec_strace(strace, &status, strace->pid);
     } else {
@@ -61,5 +61,5 @@ bool get_pid_process(strace_t *strace)
             exec_strace(strace, &status, pid);
         }
     }
-    return (true);
+    return true;
 }

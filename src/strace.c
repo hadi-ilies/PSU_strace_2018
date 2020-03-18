@@ -24,8 +24,8 @@ static bool isasyscall(long rip)
 {
     rip &= 0xffff;
     if (rip == SYSCALL_OPCODE)
-        return (true);
-    return (false);
+        return true;
+    return false;
 }
 
 static bool display_args(strace_t *strace, struct user_regs_struct *rgt)
@@ -48,7 +48,7 @@ static bool display_args(strace_t *strace, struct user_regs_struct *rgt)
             : (printf("0x%llx, ", FIND_PARMS(i)));
         printf(")");
     }
-    return (true);
+    return true;
 }
 
 static void display_ret(strace_t *strace, struct user_regs_struct *rgt,
@@ -93,7 +93,7 @@ bool exec_strace(strace_t *strace, int *status, pid_t pid)
 
     while (1) {
         if (ptrace(PTRACE_GETREGS, pid, NULL, &registers) == -1)
-            return (false);
+            return false;
         long rip = ptrace(PTRACE_PEEKDATA, pid, registers.rip, NULL);
 
         if (isasyscall(rip) && registers.rax < NB_SYSCALLS) {
@@ -102,9 +102,9 @@ bool exec_strace(strace_t *strace, int *status, pid_t pid)
             (void) printf("+++ exited with %d +++\n", WEXITSTATUS(*status));
             exit(EXIT_SUCCESS);
         } if (ptrace(PTRACE_SINGLESTEP, pid, NULL, NULL) == -1)
-            return (false);
+            return false;
         if (waitpid(pid, status, 0) == -1)
-            return (false);
+            return false;
     }
-    return (true);
+    return true;
 }
