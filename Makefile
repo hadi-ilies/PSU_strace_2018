@@ -25,8 +25,8 @@ SRC		=	$(SRCDIR)main.c \
 
 OBJ		=	$(SRC:.c=.o)
 
+CFLAGS		+=	-Wall -Wextra -Werror
 CFLAGS		+=	-I $(INCDIR)
-CFLAGS		+=	-std=gnu11 -Wall -Wextra
 
 all		:	$(NAME)
 
